@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import de.wildsau.dogtrailing.model.TrailingSession;
+
 /**
  * Created by becker on 12.02.2015.
  */
 public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.ViewHolder> {
 
-    private String[] mDataset;
+    private TrailingSession[] mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -27,7 +29,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SessionListAdapter(String[] myDataset) {
+    public SessionListAdapter(TrailingSession[] myDataset) {
         mDataset = myDataset;
     }
 
@@ -51,7 +53,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         TextView myText = (TextView) holder.view.findViewById(R.id.card_view).findViewById(R.id.info_text);
-        myText.setText(mDataset[position]);
+        myText.setText(mDataset[position].getTitle());
 
     }
 

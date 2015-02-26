@@ -1,25 +1,47 @@
 package de.wildsau.dogtrailing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.Calendar;
+
+import de.wildsau.dogtrailing.model.TrailingSession;
 
 
 public class MainActivity extends ActionBarActivity {
 
     public static final String EXTRA_MESSAGE = "de.wildsau.dogtrailing.MESSAGE";
 
+    private TrailingSession[] demoData = new TrailingSession[1];
+
     private RecyclerView sessionListRecyclerView;
     private RecyclerView.Adapter sessionListAdapter;
     private RecyclerView.LayoutManager sessionListLayoutManager;
 
+    private void createDemoData() {
+        Calendar c = Calendar.getInstance();
+
+        demoData[0] = new TrailingSession();
+        demoData[0].setTitle("Lange Fährte ohne Hund");
+        demoData[0].setNotes("Lore Ipsum Lore Impsum");
+        demoData[0].setLength(400.00);
+        demoData[0].setLocation("Pullach");
+        demoData[0].setCreatedDateTime(c.getTime());
+        c.add(Calendar.HOUR, 27);
+        demoData[0].setSearchedDateTime(c.getTime());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        createDemoData();
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setLogo(R.drawable.ic_launcher);
@@ -34,11 +56,11 @@ public class MainActivity extends ActionBarActivity {
         sessionListRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        sessionListLayoutManager = new GridLayoutManager(this, 2);
+        sessionListLayoutManager = new LinearLayoutManager(this);
         sessionListRecyclerView.setLayoutManager(sessionListLayoutManager);
 
         // specify an adapter (see also next example)
-        sessionListAdapter = new SessionListAdapter(new String[]{"Hello World", "Here we are", "There we go!", "Dummies arround the world!"});
+        sessionListAdapter = new SessionListAdapter(demoData);
         sessionListRecyclerView.setAdapter(sessionListAdapter);
     }
 
@@ -53,8 +75,8 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_search:
-                openSearch();
+            case R.id.action_add:
+                openAdd();
                 return true;
             case R.id.action_settings:
                 openSettings();
@@ -68,8 +90,10 @@ public class MainActivity extends ActionBarActivity {
         System.out.println("Hurra!!!!");
     }
 
-    private void openSearch() {
-        System.out.println("Hurz!!!!");
+    private void openAdd() {
+        Intent intent = new Intent(this, CreateActivity.class);
+        startActivity(intent);
+
     }
 
     public void sendMessage(View view) {

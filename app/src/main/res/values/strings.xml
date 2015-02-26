@@ -10,5 +10,17 @@
     <string name="title_activity_display_message">My Message</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_maps">Map</string>
+    <string name="action_add">Add</string>
+    <string name="title_activity_create">Create a new Session</string>
+    <string name="enter_session_title">Enter Title</string>
+    <string name="enter_creation">Enter trail layed</string>
+    <string name="enter_searched">Enter trail searched</string>
+    <string name="enter_note">Enter notes</string>
+    <string name="enter_location">Enter location</string>
+    <string name="service_not_available">Service not available!</string>
+    <string name="invalid_lat_long_used">Invalid location used (Lat / Long)</string>
+    <string name="no_address_found">No address found!</string>
+    <string name="address_found">Address found</string>
+    <string name="no_location_data_provided">No location data provided</string>
 
 </resources>

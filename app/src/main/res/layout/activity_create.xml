@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="de.wildsau.dogtrailing.CreateActivity">
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:orientation="horizontal">
+
+        <EditText
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:hint="@string/enter_session_title"
+            android:id="@+id/edit_session_title"
+            android:layout_gravity="fill_horizontal"
+            android:layout_columnSpan="2" />
+
+
+        <ImageView
+            android:id="@+id/image_dates"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/ic_action_event"
+            android:layout_rowSpan="2" />
+
+
+        <EditText
+            style="@style/PickerEditText"
+            android:layout_gravity="fill_horizontal"
+            android:hint="@string/enter_creation"
+            android:id="@+id/edit_creation"
+            android:focusable="false"
+            android:onClick="showDateTimePickerDialog" />
+
+        <EditText
+            style="@style/PickerEditText"
+            android:layout_gravity="fill_horizontal"
+            android:hint="@string/enter_searched"
+            android:id="@+id/edit_searched"
+            android:focusable="false"
+            android:onClick="showDateTimePickerDialog" />
+
+        <ImageView
+            android:id="@+id/image_location"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/ic_action_place" />
+
+        <LinearLayout
+            android:layout_gravity="fill_horizontal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_location"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:hint="@string/enter_location" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_location_found"
+                android:onClick="determineLocation" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_note"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/ic_action_paste" />
+
+        <EditText
+            android:id="@+id/edit_note"
+            android:layout_gravity="fill_horizontal"
+            android:hint="@string/enter_note"
+            android:layout_height="wrap_content" />
+
+    </GridLayout>
+
+
+    <!--            android:layout_width="match_parent"
+                android:layout_height="wrap_content" -->
+
+</LinearLayout>
