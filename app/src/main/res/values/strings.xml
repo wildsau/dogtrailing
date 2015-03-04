@@ -22,5 +22,6 @@
     <string name="no_address_found">No address found!</string>
     <string name="address_found">Address found</string>
     <string name="no_location_data_provided">No location data provided</string>
+    <string name="no_geocoder_available">Geocoder is not available for some reason!</string>
 
 </resources>

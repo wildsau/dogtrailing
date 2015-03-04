@@ -144,7 +144,7 @@ public class FetchAddressIntentService extends IntentService {
             for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                 addressFragments.add(address.getAddressLine(i));
             }
-            Log.i(TAG, getString(R.string.address_found));
+            Log.i(TAG, getString(R.string.address_found) + address.toString());
             deliverResultToReceiver(Constants.SUCCESS_RESULT,
                     TextUtils.join(System.getProperty("line.separator"), addressFragments));
         }
