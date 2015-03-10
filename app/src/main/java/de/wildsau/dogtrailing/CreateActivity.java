@@ -139,6 +139,13 @@ public class CreateActivity extends ActionBarActivity implements LocationService
     }
 
     @Override
+    public void onAddressResolvedFailed(String errorMessage) {
+        showToast(errorMessage);
+        locationRequested = false;
+        updateUIWidgets();
+    }
+
+    @Override
     public void onConnected() {
         updateUIWidgets();
     }

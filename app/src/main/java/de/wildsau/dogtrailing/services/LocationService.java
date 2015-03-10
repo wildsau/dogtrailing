@@ -237,6 +237,12 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
         }
     }
 
+    protected void fireOnAddressResolvedFailed(String errorMessage){
+        for(LocationServiceListener listener : listeners){
+            listener.onAddressResolvedFailed(errorMessage);
+        }
+    }
+
     protected void fireOnConnected(){
         for(LocationServiceListener listener : listeners){
             listener.onConnected();
@@ -258,6 +264,8 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
         void onCurrentLocationFound(Location location);
 
         void onAddressResolved(Address address);
+
+        void onAddressResolvedFailed(String errorMessage);
 
         void onConnected();
 
@@ -281,15 +289,18 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
          */
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-            // Display the address string or an error message sent from the intent service.
-            Address addressOutput = resultData.getParcelable(FetchAddressIntentService.Constants.RESULT_DATA_KEY);
-
-            fireOnAddressResolved(addressOutput);
-
             // Show a toast message if an address was found.
             if (resultCode == FetchAddressIntentService.Constants.SUCCESS_RESULT) {
+                // Display the address string or an error message sent from the intent service.
+                Address addressOutput = resultData.getParcelable(FetchAddressIntentService.Constants.RESULT_DATA_KEY);
+
+                fireOnAddressResolved(addressOutput);
+
                 showToast(R.string.address_found);
+            } else {
+                String errorMessage = resultData.getString(FetchAddressIntentService.Constants.ERROR_MESSAGE_DATA_KEY);
+
+                fireOnAddressResolvedFailed(errorMessage);
             }
 
             addressRequested = false;
