@@ -2,12 +2,14 @@ package de.wildsau.dogtrailing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -71,6 +73,8 @@ public class MainActivity extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
@@ -87,13 +91,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openSettings() {
-        System.out.println("Hurra!!!!");
+        showToast("Hurra!!!!");
     }
 
     private void openAdd() {
         Intent intent = new Intent(this, CreateActivity.class);
         startActivity(intent);
-
     }
 
     public void sendMessage(View view) {
@@ -102,5 +105,9 @@ public class MainActivity extends ActionBarActivity {
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
 //        startActivity(intent);
+    }
+
+    protected void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }

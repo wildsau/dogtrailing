@@ -8,7 +8,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">Main Activity</string>
     <string name="title_activity_display_message">My Message</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_maps">Map</string>
     <string name="action_add">Add</string>
     <string name="title_activity_create">Create a new Session</string>
@@ -23,5 +22,14 @@
     <string name="address_found">Address found</string>
     <string name="no_location_data_provided">No location data provided</string>
     <string name="no_geocoder_available">Geocoder is not available for some reason!</string>
+
+
+    <string name="google_api_client_connection_failed">Connecting GoogleApiClient failed! ErrorCode=%1$d</string>
+    <string name="google_api_client_connection_suspended">GoogleApiClient connection suspended. Caused by: %1$s. Waiting for reconnection.</string>
+    <string name="no_location_provided_for_address">No location provided to retrieve address for!</string>
+    <string name="enable_location_services_title">Change location settings?</string>
+    <string name="enable_location_services_message">To use location services, you have to change your device settings.</string>
+    <string name="cancel">Cancel</string>
+    <string name="activate">Activate</string>
 
 </resources>

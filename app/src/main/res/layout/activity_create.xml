@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="de.wildsau.dogtrailing.CreateActivity">
 
 
@@ -13,38 +13,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="2"
-        android:rowCount="4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:rowCount="4">
 
         <EditText
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:hint="@string/enter_session_title"
             android:id="@+id/edit_session_title"
+            android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
-            android:layout_columnSpan="2" />
+            android:hint="@string/enter_session_title"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
         <ImageView
             android:id="@+id/image_dates"
             android:layout_gravity="center_horizontal|top"
-            android:src="@drawable/ic_action_event"
-            android:layout_rowSpan="2" />
+            android:layout_rowSpan="2"
+            android:src="@drawable/ic_action_event" />
 
 
         <EditText
+            android:id="@+id/edit_creation"
             style="@style/PickerEditText"
             android:layout_gravity="fill_horizontal"
-            android:hint="@string/enter_creation"
-            android:id="@+id/edit_creation"
             android:focusable="false"
+            android:hint="@string/enter_creation"
             android:onClick="showDateTimePickerDialog" />
 
         <EditText
+            android:id="@+id/edit_searched"
             style="@style/PickerEditText"
             android:layout_gravity="fill_horizontal"
-            android:hint="@string/enter_searched"
-            android:id="@+id/edit_searched"
             android:focusable="false"
+            android:hint="@string/enter_searched"
             android:onClick="showDateTimePickerDialog" />
 
         <ImageView
@@ -56,25 +56,25 @@
             android:layout_gravity="fill_horizontal"
             android:orientation="horizontal">
 
+
             <EditText
-                android:id="@+id/edit_location"
+                android:id="@+id/edit_address"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_width="0dp"
                 android:hint="@string/enter_location" />
 
             <ImageView
                 android:id="@+id/button_determine_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_location_found"
-                android:onClick="determineLocation" />
+                android:onClick="determineLocation"
+                android:src="@drawable/ic_action_location_found" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -86,9 +86,9 @@
 
         <EditText
             android:id="@+id/edit_note"
+            android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:hint="@string/enter_note"
-            android:layout_height="wrap_content" />
+            android:hint="@string/enter_note" />
 
     </GridLayout>
 

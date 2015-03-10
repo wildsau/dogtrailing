@@ -1,4 +1,4 @@
-package de.wildsau.dogtrailing;
+package de.wildsau.dogtrailing.services;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -15,13 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import de.wildsau.dogtrailing.R;
+
 /**
  * Asynchronously handles an intent using a worker thread. Receives a ResultReceiver object and a
  * location through an intent. Tries to fetch the address for the location using a Geocoder, and
  * sends the result to the ResultReceiver.
  */
 public class FetchAddressIntentService extends IntentService {
-    private static final String TAG = "Dogtrailing.FetchAddressIntentService";
+    private static final String TAG = "FetchAddress";
 
     public final class Constants {
         public static final int SUCCESS_RESULT = 0;
@@ -29,11 +31,13 @@ public class FetchAddressIntentService extends IntentService {
         public static final int FAILURE_RESULT = 1;
 
         public static final String PACKAGE_NAME =
-                "de.wildsau.dogtrailing.locationaddress";
+                "de.wildsau.dogtrailing.services";
 
         public static final String RECEIVER = PACKAGE_NAME + ".RECEIVER";
 
         public static final String RESULT_DATA_KEY = PACKAGE_NAME + ".RESULT_DATA_KEY";
+
+        public static final String ERROR_MESSAGE_DATA_KEY = PACKAGE_NAME + ".ERROR_MESSAGE_DATA_KEY";
 
         public static final String LOCATION_DATA_EXTRA = PACKAGE_NAME + ".LOCATION_DATA_EXTRA";
     }
@@ -81,7 +85,7 @@ public class FetchAddressIntentService extends IntentService {
         if (location == null) {
             errorMessage = getString(R.string.no_location_data_provided);
             Log.wtf(TAG, errorMessage);
-            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
+            deliverErrorToReceiver(errorMessage);
             return;
         }
 
@@ -127,35 +131,26 @@ public class FetchAddressIntentService extends IntentService {
                 errorMessage = getString(R.string.no_address_found);
                 Log.e(TAG, errorMessage);
             }
-            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
+            deliverErrorToReceiver( errorMessage);
         } else {
             Address address = addresses.get(0);
-            ArrayList<String> addressFragments = new ArrayList<String>();
-
-            // Fetch the address lines using {@code getAddressLine},
-            // join them, and send them to the thread. The {@link android.location.address}
-            // class provides other options for fetching address details that you may prefer
-            // to use. Here are some examples:
-            // getLocality() ("Mountain View", for example)
-            // getAdminArea() ("CA", for example)
-            // getPostalCode() ("94043", for example)
-            // getCountryCode() ("US", for example)
-            // getCountryName() ("United States", for example)
-            for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                addressFragments.add(address.getAddressLine(i));
-            }
             Log.i(TAG, getString(R.string.address_found) + address.toString());
-            deliverResultToReceiver(Constants.SUCCESS_RESULT,
-                    TextUtils.join(System.getProperty("line.separator"), addressFragments));
+            deliverResultToReceiver(address);
         }
+    }
+
+    private void deliverErrorToReceiver(String message){
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.ERROR_MESSAGE_DATA_KEY, message);
+        mReceiver.send(Constants.FAILURE_RESULT, bundle);
     }
 
     /**
      * Sends a resultCode and message to the receiver.
      */
-    private void deliverResultToReceiver(int resultCode, String message) {
+    private void deliverResultToReceiver( Address result) {
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.RESULT_DATA_KEY, message);
-        mReceiver.send(resultCode, bundle);
+        bundle.putParcelable(Constants.RESULT_DATA_KEY, result);
+        mReceiver.send(Constants.SUCCESS_RESULT, bundle);
     }
 }
