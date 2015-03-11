@@ -7,12 +7,48 @@ import de.greenrobot.daogenerator.Schema;
 public class MyDaoGenerator {
 
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(3, "de.wildsau.dogtrailing.entities");
-        Entity box = schema.addEntity("Box");
-        box.addIdProperty();
-        box.addStringProperty("name");
-        box.addIntProperty("slots");
-        box.addStringProperty("description");
+        Schema schema = new Schema(4, "de.wildsau.dogtrailing.entities");
+        Entity trailingSession = schema.addEntity("TrailingSession");
+        trailingSession.addIdProperty();
+        trailingSession.addStringProperty("title");
+        trailingSession.addStringProperty("notes");
+        trailingSession.addStringProperty("distractions");
+        trailingSession.addStringProperty("finds");
+        trailingSession.addBooleanProperty("test");
+        trailingSession.addBooleanProperty("blind");
+        trailingSession.addDateProperty("created");
+        trailingSession.addDateProperty("searched");
+        //TODO: Decide if really necessary.
+        trailingSession.addLongProperty("exposureTime");
+        trailingSession.addStringProperty("weather");
+        trailingSession.addIntProperty("temperature");
+        trailingSession.addIntProperty("humidity");
+        trailingSession.addStringProperty("wind");
+        trailingSession.addStringProperty("windDirection");
+        trailingSession.addStringProperty("terrain");
+        trailingSession.addStringProperty("locality");
+        trailingSession.addBooleanProperty("selfCreated");
+        trailingSession.addStringProperty("laidBy");
+        trailingSession.addStringProperty("searchItem");
+        trailingSession.addStringProperty("dogHandler");
+        trailingSession.addStringProperty("dog");
+        trailingSession.addDoubleProperty("length");
+        //TODO: Create Enums for these fields
+        trailingSession.addIntProperty("startingBehaviour");
+        trailingSession.addIntProperty("cornerWork");
+        trailingSession.addIntProperty("searchBehaviour");
+        trailingSession.addIntProperty("distractionsBehaviour");
+        trailingSession.addIntProperty("overallImpression");
+        trailingSession.addIntProperty("overallImpressionDogHandler");
+
+        //TODO: The following fields may be added:
+        //fährtenart
+        //fotos
+        //Anzahl Winkel
+        //Anazahl Verleitungen
+
+
+
         new DaoGenerator().generateAll(schema, args[0]);
     }
 }
