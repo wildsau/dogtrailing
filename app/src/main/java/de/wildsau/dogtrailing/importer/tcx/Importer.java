@@ -17,7 +17,7 @@ import de.wildsau.dogtrailing.model.Track;
  */
 public class Importer {
 
-    private static final String TAG = "Dogtrailing.Importer.TCX";
+    private static final String TAG = "Importer.TCX";
 
     private final Serializer serializer;
 
