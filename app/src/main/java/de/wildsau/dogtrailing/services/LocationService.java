@@ -95,7 +95,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
 
         //TODO: Correct State handling
         // We only start the service to fetch the address if GoogleApiClient is connected.
-        if (googleApiClient.isConnected() && location != null) {
+        if (googleApiClient.isConnected()) {
             startIntentService(location);
         }
 
