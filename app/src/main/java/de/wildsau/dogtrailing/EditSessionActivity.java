@@ -33,11 +33,15 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
 
     private java.text.DateFormat timeFormat;
     private java.text.DateFormat dateFormat;
+    private EditText editSessionTitle;
     private EditText editCreation;
-    private EditText editSession;
+    private EditText editSearched;
     private ProgressBar progressBar;
     private ImageView determineLocationButton;
     private EditText addressEdit;
+
+    //TODO: This works only for create session
+    private TrailingSession currentSession = new TrailingSession();
 
     private LocationService locationService;
 
@@ -54,8 +58,10 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
         dateFormat = DateFormat.getDateFormat(getApplicationContext());
 
 
+        editSessionTitle = (EditText) findViewById(R.id.edit_session_title);
+
         editCreation = (EditText) findViewById(R.id.edit_creation);
-        editSession = (EditText) findViewById(R.id.edit_searched);
+        editSearched = (EditText) findViewById(R.id.edit_searched);
 
         addressEdit = (EditText) findViewById(R.id.edit_address);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -98,16 +104,6 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
     protected void onStart() {
         super.onStart();
 
-        //TODO: This hacked!
-
-        TrailingSessionDao dao = getDaoSession().getTrailingSessionDao();
-
-        TrailingSession session = new TrailingSession();
-        session.setCreated(new Date(System.currentTimeMillis()));
-        session.setTitle("This a newly created session: " + DateFormat.getTimeFormat(this).format(session.getCreated()));
-
-        dao.insert(session);
-
         locationService.start();
     }
 
@@ -145,7 +141,15 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
 
 
     protected void saveData() {
-        showToast("Save data must be implemented");
+        TrailingSessionDao dao = getDaoSession().getTrailingSessionDao();
+
+        currentSession.setTitle(editSessionTitle.getText().toString());
+        currentSession.setCreated(new Date(System.currentTimeMillis()));
+
+        //TODO: Only works for new entities
+        dao.insert(currentSession);
+
+        finish();
     }
 
     public void showDateTimePickerDialog(final View v) {
@@ -160,7 +164,7 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
                 if (v == editCreation) {
                     editCreation.setText(text);
                 } else {
-                    editSession.setText(text);
+                    editSearched.setText(text);
                 }
             }
         };
