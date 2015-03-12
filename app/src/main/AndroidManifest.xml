@@ -55,7 +55,7 @@
                 android:value="de.wildsau.dogtrailing.MainActivity" />
         </activity>
         <activity
-            android:name=".EditSessionActivity"
+            android:name=".edit.EditSessionActivity"
             android:label="@string/title_activity_create"
             android:parentActivityName=".MainActivity">
             <meta-data

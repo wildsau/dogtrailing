@@ -1,4 +1,4 @@
-package de.wildsau.dogtrailing;
+package de.wildsau.dogtrailing.edit;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
@@ -12,15 +12,20 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import de.wildsau.dogtrailing.DatePickerFragment;
+import de.wildsau.dogtrailing.DogTrailingApplication;
+import de.wildsau.dogtrailing.R;
 import de.wildsau.dogtrailing.entities.DaoSession;
 import de.wildsau.dogtrailing.entities.TrailingSession;
 import de.wildsau.dogtrailing.entities.TrailingSessionDao;
@@ -31,14 +36,48 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
 
     private static final String TAG = "EditSession";
 
+    //TODO: The following fields have to be handeled.
+//    private Long id;
+//    private String title;
+//    private String notes;
+//    private String distractions;
+//    private String finds;
+//    private Boolean test;
+//    private Boolean blind;
+//    private java.util.Date created;
+//    private java.util.Date searched;
+//    private Long exposureTime;
+//    private String weather;
+//    private Integer temperature;
+//    private Integer humidity;
+//    private String wind;
+//    private String windDirection;
+//    private String terrain;
+//    private String locality;
+//    private Boolean selfCreated;
+//    private String laidBy;
+//    private String searchItem;
+//    private String dogHandler;
+//    private String dog;
+//    private Double length;
+//    private Integer startingBehaviour;
+//    private Integer cornerWork;
+//    private Integer searchBehaviour;
+//    private Integer distractionsBehaviour;
+//    private Integer overallImpression;
+//    private Integer overallImpressionDogHandler;
+
+
     private java.text.DateFormat timeFormat;
     private java.text.DateFormat dateFormat;
-    private EditText editSessionTitle;
-    private EditText editCreation;
-    private EditText editSearched;
-    private ProgressBar progressBar;
-    private ImageView determineLocationButton;
-    private EditText addressEdit;
+
+    private EditText sessionTitleEdit;
+    private EditText creationEdit;
+    private EditText searchedEdit;
+    private ProgressBar locationProgressBar;
+    private ImageView locationDetermineButton;
+    private EditText locationEdit;
+    private Spinner searchBehaviourSpinner;
 
     //TODO: This works only for create session
     private TrailingSession currentSession = new TrailingSession();
@@ -57,20 +96,27 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
         timeFormat = DateFormat.getTimeFormat(getApplicationContext());
         dateFormat = DateFormat.getDateFormat(getApplicationContext());
 
+        sessionTitleEdit = (EditText) findViewById(R.id.session_title_edit);
+        creationEdit = (EditText) findViewById(R.id.creation_edit);
+        searchedEdit = (EditText) findViewById(R.id.searched_edit);
+        locationEdit = (EditText) findViewById(R.id.location_edit);
 
-        editSessionTitle = (EditText) findViewById(R.id.edit_session_title);
+        initSearchBehaviourSpinner();
 
-        editCreation = (EditText) findViewById(R.id.edit_creation);
-        editSearched = (EditText) findViewById(R.id.edit_searched);
-
-        addressEdit = (EditText) findViewById(R.id.edit_address);
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        determineLocationButton = (ImageView) findViewById(R.id.button_determine_location);
+        locationProgressBar = (ProgressBar) findViewById(R.id.location_progress_bar);
+        locationDetermineButton = (ImageView) findViewById(R.id.location_determine_button);
 
         locationRequested = false;
 
         locationService = new LocationService(this);
         locationService.addLocationServiceListener(this);
+    }
+
+    private void initSearchBehaviourSpinner() {
+        searchBehaviourSpinner = (Spinner) findViewById(R.id.search_behaviour_spinner);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, new String[]{"ABC", "DEF", "IJK"});
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        searchBehaviourSpinner.setAdapter(adapter);
     }
 
     @Override
@@ -143,7 +189,7 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
     protected void saveData() {
         TrailingSessionDao dao = getDaoSession().getTrailingSessionDao();
 
-        currentSession.setTitle(editSessionTitle.getText().toString());
+        currentSession.setTitle(sessionTitleEdit.getText().toString());
         currentSession.setCreated(new Date(System.currentTimeMillis()));
 
         //TODO: Only works for new entities
@@ -161,10 +207,10 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
                 Calendar c = Calendar.getInstance();
                 c.set(year, month, day);
                 String text = dateFormat.format(c.getTime()) + " - " + timeFormat.format(c.getTime());
-                if (v == editCreation) {
-                    editCreation.setText(text);
+                if (v == creationEdit) {
+                    creationEdit.setText(text);
                 } else {
-                    editSearched.setText(text);
+                    searchedEdit.setText(text);
                 }
             }
         };
@@ -222,18 +268,18 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
      */
     private void updateUIWidgets() {
         if (!locationService.isConnected()) {
-            determineLocationButton.setImageResource(R.drawable.ic_action_location_off);
+            locationDetermineButton.setImageResource(R.drawable.ic_action_location_off);
         } else if (!locationService.isLocationServiceEnabledOnDevice()) {
-            determineLocationButton.setImageResource(R.drawable.ic_action_location_searching);
+            locationDetermineButton.setImageResource(R.drawable.ic_action_location_searching);
         } else {
-            determineLocationButton.setImageResource(R.drawable.ic_action_location_found);
+            locationDetermineButton.setImageResource(R.drawable.ic_action_location_found);
         }
         if (locationRequested) {
-            progressBar.setVisibility(ProgressBar.VISIBLE);
-            determineLocationButton.setVisibility(ImageView.GONE);
+            locationProgressBar.setVisibility(ProgressBar.VISIBLE);
+            locationDetermineButton.setVisibility(ImageView.GONE);
         } else {
-            progressBar.setVisibility(ProgressBar.GONE);
-            determineLocationButton.setVisibility(ImageView.VISIBLE);
+            locationProgressBar.setVisibility(ProgressBar.GONE);
+            locationDetermineButton.setVisibility(ImageView.VISIBLE);
         }
     }
 

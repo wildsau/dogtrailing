@@ -3,13 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
 
-        <item name="android:editTextStyle">@android:style/Widget.EditText</item>
 
+        <item name="android:editTextStyle">@android:style/Widget.Holo.Light.EditText</item>
+        <item name="android:spinnerStyle">@android:style/Widget.Holo.Light.Spinner</item>
         <!--
-                <item name="android:actionBarStyle">@style/ActionBar</item>
-                <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
-                <item name="android:actionMenuTextColor">@color/actionbar_text</item>
-        -->
+                  <item name="android:actionBarStyle">@style/ActionBar</item>
+                  <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
+                  <item name="android:actionMenuTextColor">@color/actionbar_text</item>
+          -->
         <!-- Support library compatibility -->
         <!--        <item name="actionBarStyle">@style/ActionBar</item>
                 <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
@@ -18,10 +19,8 @@
     </style>
 
     <style name="PickerEditText" parent="@android:style/Widget.Holo.Light.Spinner">
-
-        <item name="android:paddingLeft">12dp</item>
+        <!-- <item name="android:paddingLeft">12dp</item> -->
         <item name="android:textAppearance">?android:attr/textAppearanceMediumInverse</item>
-
     </style>
 
     <!-- ActionBar styles -->

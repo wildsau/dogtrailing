@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import de.wildsau.dogtrailing.edit.EditSessionActivity;
 import de.wildsau.dogtrailing.entities.DaoSession;
 import de.wildsau.dogtrailing.model.TrailingSession;
 
