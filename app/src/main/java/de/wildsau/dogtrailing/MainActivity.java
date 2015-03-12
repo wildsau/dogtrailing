@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openSettings() {
-        showToast("Hurra!!!!");
+        showToast("Buh Hurra!!!!");
     }
 
     private void openAdd() {
