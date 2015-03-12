@@ -7,14 +7,7 @@
         android:id="@+id/session_list"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
-
-
-    <EditText
-        android:id="@+id/edit_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_message" />
+        android:layout_height="match_parent" />
 
     <!--
 

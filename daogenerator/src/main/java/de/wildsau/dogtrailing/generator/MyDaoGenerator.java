@@ -8,6 +8,10 @@ public class MyDaoGenerator {
 
     public static void main(String args[]) throws Exception {
         Schema schema = new Schema(4, "de.wildsau.dogtrailing.entities");
+
+        schema.enableActiveEntitiesByDefault();
+        schema.enableKeepSectionsByDefault();
+
         Entity trailingSession = schema.addEntity("TrailingSession");
         trailingSession.addIdProperty();
         trailingSession.addStringProperty("title");

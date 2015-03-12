@@ -6,14 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import de.wildsau.dogtrailing.model.TrailingSession;
+import java.util.List;
+
+import de.greenrobot.dao.query.QueryBuilder;
+import de.wildsau.dogtrailing.entities.DaoSession;
+import de.wildsau.dogtrailing.entities.TrailingSession;
+import de.wildsau.dogtrailing.entities.TrailingSessionDao;
 
 /**
  * Created by becker on 12.02.2015.
  */
-public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.ViewHolder> {
+public class TrailingSessionListAdapter extends RecyclerView.Adapter<TrailingSessionListAdapter.ViewHolder> {
 
-    private TrailingSession[] mDataset;
+
+    private List<TrailingSession> items;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -29,14 +35,18 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SessionListAdapter(TrailingSession[] myDataset) {
-        mDataset = myDataset;
+    public TrailingSessionListAdapter(DaoSession session) {
+        QueryBuilder<TrailingSession> qb = session.getTrailingSessionDao().queryBuilder();
+
+        qb.orderDesc(TrailingSessionDao.Properties.Created);
+
+        items = qb.listLazy();
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public SessionListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                            int viewType) {
+    public TrailingSessionListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                    int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.session_list_card_view, parent, false);
@@ -53,14 +63,14 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         TextView myText = (TextView) holder.view.findViewById(R.id.card_view).findViewById(R.id.info_text);
-        myText.setText(mDataset[position].getTitle());
+        myText.setText(items.get(position).getTitle());
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return items.size();
     }
 }
 

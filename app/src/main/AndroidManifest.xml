@@ -33,7 +33,7 @@
             android:value="AIzaSyAC81D4-cBAS0aYX4LxmDCA-Ni8G1BDGWc" />
 
         <activity android:name=".MainActivity">
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -43,19 +43,19 @@
             android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
             android:parentActivityName=".MainActivity">
-        <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.wildsau.dogtrailing.MainActivity" />
         </activity>
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
-        <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.wildsau.dogtrailing.MainActivity" />
         </activity>
         <activity
-            android:name=".CreateActivity"
+            android:name=".EditSessionActivity"
             android:label="@string/title_activity_create"
             android:parentActivityName=".MainActivity">
             <meta-data

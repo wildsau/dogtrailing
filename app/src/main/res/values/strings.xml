@@ -31,5 +31,6 @@
     <string name="enable_location_services_message">To use location services, you have to change your device settings.</string>
     <string name="cancel">Cancel</string>
     <string name="activate">Activate</string>
+    <string name="action_save">Save</string>
 
 </resources>

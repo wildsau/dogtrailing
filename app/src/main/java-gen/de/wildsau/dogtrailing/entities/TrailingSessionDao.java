@@ -55,6 +55,8 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
 
     ;
 
+    private DaoSession daoSession;
+
 
     public TrailingSessionDao(DaoConfig config) {
         super(config);
@@ -62,6 +64,7 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
 
     public TrailingSessionDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
+        this.daoSession = daoSession;
     }
 
     /**
@@ -260,6 +263,12 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
         if (overallImpressionDogHandler != null) {
             stmt.bindLong(29, overallImpressionDogHandler);
         }
+    }
+
+    @Override
+    protected void attachEntity(TrailingSession entity) {
+        super.attachEntity(entity);
+        entity.__setDaoSession(daoSession);
     }
 
     /**

@@ -2,7 +2,6 @@ package de.wildsau.dogtrailing;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import de.wildsau.dogtrailing.entities.DaoSession;
 import de.wildsau.dogtrailing.model.TrailingSession;
 
 
@@ -61,9 +61,11 @@ public class MainActivity extends ActionBarActivity {
         sessionListLayoutManager = new LinearLayoutManager(this);
         sessionListRecyclerView.setLayoutManager(sessionListLayoutManager);
 
+        //TODO: Reloading of adapter and closing
         // specify an adapter (see also next example)
-        sessionListAdapter = new SessionListAdapter(demoData);
+        sessionListAdapter = new TrailingSessionListAdapter(getDaoSession());
         sessionListRecyclerView.setAdapter(sessionListAdapter);
+
     }
 
     @Override
@@ -72,7 +74,6 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
     @Override
@@ -95,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openAdd() {
-        Intent intent = new Intent(this, CreateActivity.class);
+        Intent intent = new Intent(this, EditSessionActivity.class);
         startActivity(intent);
     }
 
@@ -105,6 +106,10 @@ public class MainActivity extends ActionBarActivity {
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
 //        startActivity(intent);
+    }
+
+    private DaoSession getDaoSession() {
+        return ((DogTrailingApplication) getApplication()).getDaoSession();
     }
 
     protected void showToast(String text) {
