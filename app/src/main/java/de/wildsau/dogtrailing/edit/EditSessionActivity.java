@@ -13,17 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.Date;
 
-import de.wildsau.dogtrailing.DatePickerFragment;
 import de.wildsau.dogtrailing.DogTrailingApplication;
 import de.wildsau.dogtrailing.R;
 import de.wildsau.dogtrailing.entities.DaoSession;
@@ -32,9 +29,11 @@ import de.wildsau.dogtrailing.entities.TrailingSessionDao;
 import de.wildsau.dogtrailing.services.LocationService;
 
 
-public class EditSessionActivity extends ActionBarActivity implements LocationService.LocationServiceListener {
+public class EditSessionActivity extends ActionBarActivity implements LocationService.LocationServiceListener, DateTimePickerFragment.OnDateTimeChangedListener {
 
     private static final String TAG = "EditSession";
+    private static final String CREATED_DATE_TAG = "CreatedDateFragment";
+    private static final String SEARCHED_DATE_TAG = "SearchedDateFragment";
 
     //TODO: The following fields have to be handeled.
 //    private Long id;
@@ -93,8 +92,8 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_cancel);
 
-        timeFormat = DateFormat.getTimeFormat(getApplicationContext());
-        dateFormat = DateFormat.getDateFormat(getApplicationContext());
+        timeFormat = DateFormat.getTimeFormat(this);
+        dateFormat = DateFormat.getDateFormat(this);
 
         sessionTitleEdit = (EditText) findViewById(R.id.session_title_edit);
         creationEdit = (EditText) findViewById(R.id.creation_edit);
@@ -198,25 +197,31 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
         finish();
     }
 
-    public void showDateTimePickerDialog(final View v) {
-        final DialogFragment newFragment = new DatePickerFragment() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                super.onDateSet(view, year, month, day);
+    public void pickCreatedDateTime(final View v) {
+        //TODO: Initialize with current value
+        final DialogFragment createdDateTimePicker = new DateTimePickerFragment();
 
-                Calendar c = Calendar.getInstance();
-                c.set(year, month, day);
-                String text = dateFormat.format(c.getTime()) + " - " + timeFormat.format(c.getTime());
-                if (v == creationEdit) {
-                    creationEdit.setText(text);
-                } else {
-                    searchedEdit.setText(text);
-                }
-            }
-        };
+        createdDateTimePicker.show(getFragmentManager(), CREATED_DATE_TAG);
+    }
 
-        newFragment.show(getFragmentManager(), "datePicker");
-        //TODO: Pick Time
+    public void pickSearchedDateTime(final View v) {
+        //TODO: Initialize with current value
+        final DialogFragment searchedDateTimePicker = new DateTimePickerFragment();
+
+        searchedDateTimePicker.show(getFragmentManager(), SEARCHED_DATE_TAG);
+    }
+
+    @Override
+    public void onDateTimeChanged(DateTimePickerFragment dateTimePickerFragment, Date dateTime) {
+        String text = dateFormat.format(dateTime) + " - " + timeFormat.format(dateTime);
+
+        String tag = dateTimePickerFragment.getTag();
+        //TODO: Save to local field
+        if (CREATED_DATE_TAG.equals(tag)) {
+            creationEdit.setText(text);
+        } else if (SEARCHED_DATE_TAG.equals(tag)) {
+            searchedEdit.setText(text);
+        }
     }
 
     public void determineLocation(View view) {

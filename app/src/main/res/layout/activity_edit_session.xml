@@ -43,7 +43,7 @@
             android:focusable="false"
             android:layout_gravity="fill_horizontal"
             android:hint="@string/enter_creation"
-            android:onClick="showDateTimePickerDialog"
+            android:onClick="pickCreatedDateTime"
             style="@style/PickerEditText" />
 
         <EditText
@@ -51,7 +51,7 @@
             android:focusable="false"
             android:layout_gravity="fill_horizontal"
             android:hint="@string/enter_searched"
-            android:onClick="showDateTimePickerDialog"
+            android:onClick="pickSearchedDateTime"
             style="@style/PickerEditText" />
     </GridLayout>
 
@@ -104,7 +104,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_rowSpan="2"
+            android:layout_rowSpan="3"
             android:src="@drawable/ic_action_paste" />
 
         <Spinner
@@ -118,6 +118,12 @@
             android:layout_gravity="fill_horizontal"
             android:lines="3"
             android:hint="@string/enter_note" />
+
+        <RatingBar
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:rating="2.5" />
 
     </GridLayout>
 </LinearLayout>
