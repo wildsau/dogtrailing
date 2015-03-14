@@ -97,10 +97,10 @@ public class DateTimePickerFragment extends DialogFragment implements TimePicker
         timePicker = (TimePicker) view.findViewById(R.id.time_picker);
         datePicker = (DatePicker) view.findViewById(R.id.date_picker);
 
-        timePicker.setOnTimeChangedListener(this);
         timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
         timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
         timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
+        timePicker.setOnTimeChangedListener(this);
 
         datePicker.init(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
