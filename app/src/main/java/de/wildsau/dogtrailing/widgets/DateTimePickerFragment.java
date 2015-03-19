@@ -1,4 +1,4 @@
-package de.wildsau.dogtrailing.edit;
+package de.wildsau.dogtrailing.widgets;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,7 +22,7 @@ import de.wildsau.dogtrailing.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link de.wildsau.dogtrailing.edit.DateTimePickerFragment.OnDateTimeChangedListener} interface
+ * {@link DateTimePickerFragment.OnDateTimeChangedListener} interface
  * to handle interaction events.
  * Use the {@link DateTimePickerFragment#newInstance} factory method to
  * create an instance of this fragment.

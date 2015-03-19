@@ -19,6 +19,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.wefika.flowlayout.FlowLayout;
+
 import java.util.Date;
 
 import de.wildsau.dogtrailing.DogTrailingApplication;
@@ -26,7 +28,10 @@ import de.wildsau.dogtrailing.R;
 import de.wildsau.dogtrailing.entities.DaoSession;
 import de.wildsau.dogtrailing.entities.TrailingSession;
 import de.wildsau.dogtrailing.entities.TrailingSessionDao;
+import de.wildsau.dogtrailing.model.SessionTag;
 import de.wildsau.dogtrailing.services.LocationService;
+import de.wildsau.dogtrailing.widgets.DateTimePickerFragment;
+import de.wildsau.dogtrailing.widgets.TagView;
 
 
 public class EditSessionActivity extends ActionBarActivity implements LocationService.LocationServiceListener, DateTimePickerFragment.OnDateTimeChangedListener {
@@ -109,6 +114,21 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
 
         locationService = new LocationService(this);
         locationService.addLocationServiceListener(this);
+
+        //TODO: Testing Code
+        FlowLayout tagList = (FlowLayout) findViewById(R.id.tag_list);
+
+        for (SessionTag tag : SessionTag.values()) {
+            TagView tv = new TagView(this);
+            tv.setValue(tag);
+
+            FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+
+            tv.setLayoutParams(params);
+
+
+            tagList.addView(tv);
+        }
     }
 
     private void initSearchBehaviourSpinner() {

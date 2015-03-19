@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.wildsau.dogtrailing.edit.DateTimePickerFragment">
+    tools:context="de.wildsau.dogtrailing.widgets.DateTimePickerFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

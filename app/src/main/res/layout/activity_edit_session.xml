@@ -1,10 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="de.wildsau.dogtrailing.edit.EditSessionActivity">
-
     <EditText
         android:id="@+id/session_title_edit"
         android:hint="@string/enter_session_title"
@@ -98,7 +102,8 @@
             <ProgressBar
                 android:id="@+id/location_progress_bar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
         </LinearLayout>
 
         <ImageView
@@ -119,11 +124,26 @@
             android:lines="3"
             android:hint="@string/enter_note" />
 
-        <RatingBar
-            style="?android:attr/ratingBarStyleSmall"
-            android:numStars="5"
-            android:stepSize="0.5"
-            android:rating="2.5" />
+        <!--        <RatingBar
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="2.5" />
+        -->
+
+
+        <com.wefika.flowlayout.FlowLayout
+            android:id="@+id/tag_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:gravity="start|top">
+
+
+        </com.wefika.flowlayout.FlowLayout>
 
     </GridLayout>
-</LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
