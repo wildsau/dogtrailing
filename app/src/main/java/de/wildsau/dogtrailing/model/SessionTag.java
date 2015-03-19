@@ -67,6 +67,26 @@ public enum SessionTag {
         return context.getResources().getString(resIdLocalizedName);
     }
 
+    public static long toBitRepresentation(EnumSet<SessionTag> tags) {
+        long retval = 0;
+
+        for (SessionTag tag : tags) {
+            retval |= 1L << (tag.id - 1); //Transformation of 1 based to zerobased.
+        }
+        return retval;
+    }
+
+    public static EnumSet<SessionTag> fromBitRepresentation(long value) {
+        EnumSet<SessionTag> retval = EnumSet.noneOf(SessionTag.class);
+
+        for (SessionTag tag : SessionTag.values()) {
+            if ((value & (1L << (tag.id - 1))) != 0) {
+                retval.add(tag);
+            }
+        }
+        return retval;
+    }
+
     private static EnumSet<SessionTag> startTags = EnumSet.of(START_OK,
             START_TOO_FAST,
             START_TOO_SLOW,

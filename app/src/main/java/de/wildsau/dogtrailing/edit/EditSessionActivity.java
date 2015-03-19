@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.wefika.flowlayout.FlowLayout;
 
 import java.util.Date;
+import java.util.EnumSet;
 
 import de.wildsau.dogtrailing.DogTrailingApplication;
 import de.wildsau.dogtrailing.R;
@@ -116,6 +117,9 @@ public class EditSessionActivity extends ActionBarActivity implements LocationSe
         locationService.addLocationServiceListener(this);
 
         //TODO: Testing Code
+
+        EnumSet<SessionTag> list = EnumSet.of(SessionTag.START_OK, SessionTag.START_UNINTERESTED, SessionTag.DISTRACTIONS_STUCK);
+
         FlowLayout tagList = (FlowLayout) findViewById(R.id.tag_list);
 
         for (SessionTag tag : SessionTag.values()) {
