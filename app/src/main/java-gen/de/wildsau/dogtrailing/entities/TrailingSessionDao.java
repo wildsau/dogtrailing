@@ -45,12 +45,8 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
         public final static Property DogHandler = new Property(20, String.class, "dogHandler", false, "DOG_HANDLER");
         public final static Property Dog = new Property(21, String.class, "dog", false, "DOG");
         public final static Property Length = new Property(22, Double.class, "length", false, "LENGTH");
-        public final static Property StartingBehaviour = new Property(23, Integer.class, "startingBehaviour", false, "STARTING_BEHAVIOUR");
-        public final static Property CornerWork = new Property(24, Integer.class, "cornerWork", false, "CORNER_WORK");
-        public final static Property SearchBehaviour = new Property(25, Integer.class, "searchBehaviour", false, "SEARCH_BEHAVIOUR");
-        public final static Property DistractionsBehaviour = new Property(26, Integer.class, "distractionsBehaviour", false, "DISTRACTIONS_BEHAVIOUR");
-        public final static Property OverallImpression = new Property(27, Integer.class, "overallImpression", false, "OVERALL_IMPRESSION");
-        public final static Property OverallImpressionDogHandler = new Property(28, Integer.class, "overallImpressionDogHandler", false, "OVERALL_IMPRESSION_DOG_HANDLER");
+        public final static Property Rating = new Property(23, Float.class, "rating", false, "RATING");
+        public final static Property Tags = new Property(24, Long.class, "tags", false, "TAGS");
     }
 
     ;
@@ -96,12 +92,8 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
                 "'DOG_HANDLER' TEXT," + // 20: dogHandler
                 "'DOG' TEXT," + // 21: dog
                 "'LENGTH' REAL," + // 22: length
-                "'STARTING_BEHAVIOUR' INTEGER," + // 23: startingBehaviour
-                "'CORNER_WORK' INTEGER," + // 24: cornerWork
-                "'SEARCH_BEHAVIOUR' INTEGER," + // 25: searchBehaviour
-                "'DISTRACTIONS_BEHAVIOUR' INTEGER," + // 26: distractionsBehaviour
-                "'OVERALL_IMPRESSION' INTEGER," + // 27: overallImpression
-                "'OVERALL_IMPRESSION_DOG_HANDLER' INTEGER);"); // 28: overallImpressionDogHandler
+                "'RATING' REAL," + // 23: rating
+                "'TAGS' INTEGER);"); // 24: tags
     }
 
     /**
@@ -234,34 +226,14 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
             stmt.bindDouble(23, length);
         }
 
-        Integer startingBehaviour = entity.getStartingBehaviour();
-        if (startingBehaviour != null) {
-            stmt.bindLong(24, startingBehaviour);
+        Float rating = entity.getRating();
+        if (rating != null) {
+            stmt.bindDouble(24, rating);
         }
 
-        Integer cornerWork = entity.getCornerWork();
-        if (cornerWork != null) {
-            stmt.bindLong(25, cornerWork);
-        }
-
-        Integer searchBehaviour = entity.getSearchBehaviour();
-        if (searchBehaviour != null) {
-            stmt.bindLong(26, searchBehaviour);
-        }
-
-        Integer distractionsBehaviour = entity.getDistractionsBehaviour();
-        if (distractionsBehaviour != null) {
-            stmt.bindLong(27, distractionsBehaviour);
-        }
-
-        Integer overallImpression = entity.getOverallImpression();
-        if (overallImpression != null) {
-            stmt.bindLong(28, overallImpression);
-        }
-
-        Integer overallImpressionDogHandler = entity.getOverallImpressionDogHandler();
-        if (overallImpressionDogHandler != null) {
-            stmt.bindLong(29, overallImpressionDogHandler);
+        Long tags = entity.getTags();
+        if (tags != null) {
+            stmt.bindLong(25, tags);
         }
     }
 
@@ -308,12 +280,8 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
                 cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // dogHandler
                 cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // dog
                 cursor.isNull(offset + 22) ? null : cursor.getDouble(offset + 22), // length
-                cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23), // startingBehaviour
-                cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // cornerWork
-                cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25), // searchBehaviour
-                cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26), // distractionsBehaviour
-                cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27), // overallImpression
-                cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28) // overallImpressionDogHandler
+                cursor.isNull(offset + 23) ? null : cursor.getFloat(offset + 23), // rating
+                cursor.isNull(offset + 24) ? null : cursor.getLong(offset + 24) // tags
         );
         return entity;
     }
@@ -346,12 +314,8 @@ public class TrailingSessionDao extends AbstractDao<TrailingSession, Long> {
         entity.setDogHandler(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
         entity.setDog(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setLength(cursor.isNull(offset + 22) ? null : cursor.getDouble(offset + 22));
-        entity.setStartingBehaviour(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
-        entity.setCornerWork(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
-        entity.setSearchBehaviour(cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25));
-        entity.setDistractionsBehaviour(cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26));
-        entity.setOverallImpression(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
-        entity.setOverallImpressionDogHandler(cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28));
+        entity.setRating(cursor.isNull(offset + 23) ? null : cursor.getFloat(offset + 23));
+        entity.setTags(cursor.isNull(offset + 24) ? null : cursor.getLong(offset + 24));
     }
 
     /**

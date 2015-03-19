@@ -6,7 +6,6 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
-
 /**
  * Entity mapped to table TRAILING_SESSION.
  */
@@ -35,21 +34,15 @@ public class TrailingSession {
     private String dogHandler;
     private String dog;
     private Double length;
-    private Integer startingBehaviour;
-    private Integer cornerWork;
-    private Integer searchBehaviour;
-    private Integer distractionsBehaviour;
-    private Integer overallImpression;
-    private Integer overallImpressionDogHandler;
+    private Float rating;
+    private Long tags;
 
     /**
      * Used to resolve relations
      */
     private transient DaoSession daoSession;
 
-    /**
-     * Used for active entity operations.
-     */
+    /** Used for active entity operations. */
     private transient TrailingSessionDao myDao;
 
 
@@ -63,7 +56,7 @@ public class TrailingSession {
         this.id = id;
     }
 
-    public TrailingSession(Long id, String title, String notes, String distractions, String finds, Boolean test, Boolean blind, java.util.Date created, java.util.Date searched, Long exposureTime, String weather, Integer temperature, Integer humidity, String wind, String windDirection, String terrain, String locality, Boolean selfCreated, String laidBy, String searchItem, String dogHandler, String dog, Double length, Integer startingBehaviour, Integer cornerWork, Integer searchBehaviour, Integer distractionsBehaviour, Integer overallImpression, Integer overallImpressionDogHandler) {
+    public TrailingSession(Long id, String title, String notes, String distractions, String finds, Boolean test, Boolean blind, java.util.Date created, java.util.Date searched, Long exposureTime, String weather, Integer temperature, Integer humidity, String wind, String windDirection, String terrain, String locality, Boolean selfCreated, String laidBy, String searchItem, String dogHandler, String dog, Double length, Float rating, Long tags) {
         this.id = id;
         this.title = title;
         this.notes = notes;
@@ -87,17 +80,11 @@ public class TrailingSession {
         this.dogHandler = dogHandler;
         this.dog = dog;
         this.length = length;
-        this.startingBehaviour = startingBehaviour;
-        this.cornerWork = cornerWork;
-        this.searchBehaviour = searchBehaviour;
-        this.distractionsBehaviour = distractionsBehaviour;
-        this.overallImpression = overallImpression;
-        this.overallImpressionDogHandler = overallImpressionDogHandler;
+        this.rating = rating;
+        this.tags = tags;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getTrailingSessionDao() : null;
@@ -287,85 +274,50 @@ public class TrailingSession {
         this.length = length;
     }
 
-    public Integer getStartingBehaviour() {
-        return startingBehaviour;
+    public Float getRating() {
+        return rating;
     }
 
-    public void setStartingBehaviour(Integer startingBehaviour) {
-        this.startingBehaviour = startingBehaviour;
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 
-    public Integer getCornerWork() {
-        return cornerWork;
+    public Long getTags() {
+        return tags;
     }
 
-    public void setCornerWork(Integer cornerWork) {
-        this.cornerWork = cornerWork;
+    public void setTags(Long tags) {
+        this.tags = tags;
     }
 
-    public Integer getSearchBehaviour() {
-        return searchBehaviour;
-    }
-
-    public void setSearchBehaviour(Integer searchBehaviour) {
-        this.searchBehaviour = searchBehaviour;
-    }
-
-    public Integer getDistractionsBehaviour() {
-        return distractionsBehaviour;
-    }
-
-    public void setDistractionsBehaviour(Integer distractionsBehaviour) {
-        this.distractionsBehaviour = distractionsBehaviour;
-    }
-
-    public Integer getOverallImpression() {
-        return overallImpression;
-    }
-
-    public void setOverallImpression(Integer overallImpression) {
-        this.overallImpression = overallImpression;
-    }
-
-    public Integer getOverallImpressionDogHandler() {
-        return overallImpressionDogHandler;
-    }
-
-    public void setOverallImpressionDogHandler(Integer overallImpressionDogHandler) {
-        this.overallImpressionDogHandler = overallImpressionDogHandler;
-    }
-
-    /**
-     * Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context.
-     */
+    /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */
     public void delete() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
-        }
+        }    
         myDao.delete(this);
     }
 
-    /**
-     * Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context.
-     */
+    /** Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context. */
     public void update() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
-        }
+        }    
         myDao.update(this);
     }
 
-    /**
-     * Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context.
-     */
+    /** Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context. */
     public void refresh() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
-        }
+        }    
         myDao.refresh(this);
     }
 
     // KEEP METHODS - put your custom methods here
+
+
+
     // KEEP METHODS END
 
 }
