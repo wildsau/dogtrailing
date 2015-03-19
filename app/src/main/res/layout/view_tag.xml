@@ -12,8 +12,7 @@
         android:id="@+id/tag_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:text="Enum Name" />
+        android:textColor="@android:color/white" />
 
     <ImageView
         android:id="@+id/remove_button"

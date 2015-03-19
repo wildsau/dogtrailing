@@ -40,14 +40,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.wildsau.dogtrailing.MainActivity" />
-        </activity>
-        <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
             <meta-data

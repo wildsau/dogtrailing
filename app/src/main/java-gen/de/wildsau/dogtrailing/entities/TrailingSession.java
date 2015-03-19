@@ -6,6 +6,7 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
+
 /**
  * Entity mapped to table TRAILING_SESSION.
  */
@@ -42,7 +43,9 @@ public class TrailingSession {
      */
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     private transient TrailingSessionDao myDao;
 
 
@@ -84,7 +87,9 @@ public class TrailingSession {
         this.tags = tags;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getTrailingSessionDao() : null;
@@ -290,34 +295,37 @@ public class TrailingSession {
         this.tags = tags;
     }
 
-    /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */
+    /**
+     * Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context.
+     */
     public void delete() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
-        }    
+        }
         myDao.delete(this);
     }
 
-    /** Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context. */
+    /**
+     * Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context.
+     */
     public void update() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
-        }    
+        }
         myDao.update(this);
     }
 
-    /** Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context. */
+    /**
+     * Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context.
+     */
     public void refresh() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
-        }    
+        }
         myDao.refresh(this);
     }
 
     // KEEP METHODS - put your custom methods here
-
-
-
     // KEEP METHODS END
 
 }

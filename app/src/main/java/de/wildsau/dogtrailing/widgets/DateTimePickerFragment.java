@@ -33,9 +33,6 @@ public class DateTimePickerFragment extends DialogFragment implements TimePicker
 
     private OnDateTimeChangedListener onDateTimeChangedListener;
 
-    private TimePicker timePicker;
-    private DatePicker datePicker;
-
     private java.text.DateFormat timeFormat;
     private java.text.DateFormat dateFormat;
 
@@ -94,8 +91,8 @@ public class DateTimePickerFragment extends DialogFragment implements TimePicker
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_date_time_picker, null);
 
-        timePicker = (TimePicker) view.findViewById(R.id.time_picker);
-        datePicker = (DatePicker) view.findViewById(R.id.date_picker);
+        TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
+        DatePicker datePicker = (DatePicker) view.findViewById(R.id.date_picker);
 
         timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
         timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
@@ -110,7 +107,7 @@ public class DateTimePickerFragment extends DialogFragment implements TimePicker
 
         builder.setView(view)
                 .setTitle(getDateTimeString())
-                .setPositiveButton(R.string.set, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.datetime_picker_set, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
                         if (onDateTimeChangedListener != null) {
@@ -118,7 +115,7 @@ public class DateTimePickerFragment extends DialogFragment implements TimePicker
                         }
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.datetime_picker_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Nadas!
                     }

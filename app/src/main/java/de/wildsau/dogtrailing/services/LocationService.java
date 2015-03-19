@@ -130,11 +130,8 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
 
     public boolean isLocationServiceEnabledOnDevice() {
         LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            return false;
-        } else {
-            return true;
-        }
+
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER) || manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
     public void startEnableLocationServicesIntent() {
@@ -153,7 +150,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
                 context.startActivity(viewIntent);
             }
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.datetime_picker_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog, do nothing.
             }

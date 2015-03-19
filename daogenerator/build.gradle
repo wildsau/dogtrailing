@@ -3,6 +3,8 @@ project(':daogenerator') {
     apply plugin: 'java'
 
     mainClassName = "de.wildsau.dogtrailing.generator.MyDaoGenerator"
+    def directory = "../app/src/main/java-gen"
+    def params = [directory]
 
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -10,11 +12,12 @@ project(':daogenerator') {
     }
 
     task createDocs {
-        def docs = file("../app/src/main/java-gen")
+        def docs = file(directory)
         docs.mkdirs()
     }
 
     run {
-        args "../app/src/main/java-gen"
+        //noinspection GroovyAssignabilityCheck
+        args params
     }
 }

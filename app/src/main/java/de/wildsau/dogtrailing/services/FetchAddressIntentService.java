@@ -7,11 +7,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -131,7 +129,7 @@ public class FetchAddressIntentService extends IntentService {
                 errorMessage = getString(R.string.no_address_found);
                 Log.e(TAG, errorMessage);
             }
-            deliverErrorToReceiver( errorMessage);
+            deliverErrorToReceiver(errorMessage);
         } else {
             Address address = addresses.get(0);
             Log.i(TAG, getString(R.string.address_found) + address.toString());
@@ -139,7 +137,7 @@ public class FetchAddressIntentService extends IntentService {
         }
     }
 
-    private void deliverErrorToReceiver(String message){
+    private void deliverErrorToReceiver(String message) {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.ERROR_MESSAGE_DATA_KEY, message);
         mReceiver.send(Constants.FAILURE_RESULT, bundle);
@@ -148,7 +146,7 @@ public class FetchAddressIntentService extends IntentService {
     /**
      * Sends a resultCode and message to the receiver.
      */
-    private void deliverResultToReceiver( Address result) {
+    private void deliverResultToReceiver(Address result) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.RESULT_DATA_KEY, result);
         mReceiver.send(Constants.SUCCESS_RESULT, bundle);
