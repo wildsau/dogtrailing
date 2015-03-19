@@ -10,8 +10,7 @@ import de.wildsau.dogtrailing.R;
  * Created by becker on 16.03.2015.
  */
 public enum SessionTag {
-    //TODO: Übersetzung für Boegelt.
-    //TODO: Missing Icons for Handler, Search
+
     START_OK(1, SessionTagCategory.START, R.string.tag_start_ok),
     START_TOO_FAST(2, SessionTagCategory.START, R.string.tag_start_too_fast),
     START_TOO_SLOW(3, SessionTagCategory.START, R.string.tag_start_too_slow),
@@ -23,7 +22,7 @@ public enum SessionTag {
     CORNERS_OVERRUNNING(8, SessionTagCategory.CORNERS, R.string.tag_corners_overrunning),
     CORNERS_HIGH_NOSE(9, SessionTagCategory.CORNERS, R.string.tag_corners_high_nose),
     CORNERS_STUCK(10, SessionTagCategory.CORNERS, R.string.tag_corners_stuck),
-    //TODO: Distractions Missing
+
     SEARCH_OK(11, SessionTagCategory.SEARCH, R.string.tag_search_ok),
     SEARCH_TOO_FAST(12, SessionTagCategory.SEARCH, R.string.tag_search_too_fast),
     SEARCH_TOO_SLOW(13, SessionTagCategory.SEARCH, R.string.tag_search_too_slow),
@@ -41,7 +40,13 @@ public enum SessionTag {
 
     HANDLER_UNCERTAIN(24, SessionTagCategory.HANDLER, R.string.tag_handler_uncertain),
     HANDLER_CONCENTRATED(25, SessionTagCategory.HANDLER, R.string.tag_handler_concentrated),
-    HANDLER_BORED(26, SessionTagCategory.HANDLER, R.string.tag_handler_bored);
+    HANDLER_BORED(26, SessionTagCategory.HANDLER, R.string.tag_handler_bored),
+
+    DISTRACTIONS_ACCEPTED(27, SessionTagCategory.DISTRACTIONS, R.string.tag_distractions_accepted),
+    DISTRACTIONS_NOT_ACCEPTED(28, SessionTagCategory.DISTRACTIONS, R.string.tag_distractions_not_accepted),
+    DISTRACTIONS_SEARCHES_BACK(29, SessionTagCategory.DISTRACTIONS, R.string.tag_distractions_searches_back),
+    DISTRACTIONS_SEARCHES_SUPPORT(30, SessionTagCategory.DISTRACTIONS, R.string.tag_distractions_searches_support),
+    DISTRACTIONS_STUCK(31, SessionTagCategory.DISTRACTIONS, R.string.tag_distractions_stuck);
 
     private final int id;
     private final SessionTagCategory category;

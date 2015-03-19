@@ -68,5 +68,10 @@
     <string name="tag_handler_uncertain">Uncertain</string>
     <string name="tag_handler_concentrated">Concentrated</string>
     <string name="tag_handler_bored">Bored</string>
+    <string name="tag_distractions_accepted">Accepted</string>
+    <string name="tag_distractions_not_accepted">Not Accepted</string>
+    <string name="tag_distractions_searches_back">Searches Back</string>
+    <string name="tag_distractions_searches_support">Searches Support</string>
+    <string name="tag_distractions_stuck">Stuck</string>
 
 </resources>
