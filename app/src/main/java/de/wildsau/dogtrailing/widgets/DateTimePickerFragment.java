@@ -150,11 +150,21 @@ public class DateTimePickerFragment extends DialogFragment implements TimePicker
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            onDateTimeChangedListener = (OnDateTimeChangedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnDateTimeChangedListener");
+        // If called from a fragment, then this must implement the OnDateTimeChangedListener, otherwise the activity
+        if (getTargetFragment() != null) {
+            try {
+                onDateTimeChangedListener = (OnDateTimeChangedListener) getTargetFragment();
+            } catch (ClassCastException e) {
+                throw new ClassCastException(getTargetFragment().toString()
+                        + " must implement OnDateTimeChangedListener");
+            }
+        } else {
+            try {
+                onDateTimeChangedListener = (OnDateTimeChangedListener) activity;
+            } catch (ClassCastException e) {
+                throw new ClassCastException(activity.toString()
+                        + " must implement OnDateTimeChangedListener");
+            }
         }
     }
 

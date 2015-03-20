@@ -65,6 +65,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     public void stop() {
         if (googleApiClient.isConnected() || googleApiClient.isConnecting()) {
             googleApiClient.disconnect();
+            fireOnDisconnected();
         }
     }
 
@@ -73,9 +74,10 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     //region ### Business Logic Methods ###
 
     public void retrieveCurrentLocation() {
+        Log.i(TAG, LocationServices.FusedLocationApi.getLastLocation(googleApiClient).toString());
         LocationRequest request = LocationRequest.create()
                 .setNumUpdates(1)
-                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,request,new SingleLocationRequestListener());
     }
 
@@ -169,6 +171,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     public final class SingleLocationRequestListener implements LocationListener {
         @Override
         public void onLocationChanged(Location location) {
+            Log.i(TAG, "onLocationChanged() fired!");
             LocationService.this.fireOnCurrentLocationFound(location);
         }
     }
@@ -223,30 +226,35 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
     protected void fireOnCurrentLocationFound(Location location){
+        Log.i(TAG, "onCurrentLocationFound() fired!");
         for(LocationServiceListener listener : listeners){
             listener.onCurrentLocationFound(location);
         }
     }
 
     protected void fireOnAddressResolved(Address address){
+        Log.i(TAG, "onAddressResolved() fired!");
         for(LocationServiceListener listener : listeners){
             listener.onAddressResolved(address);
         }
     }
 
     protected void fireOnAddressResolvedFailed(String errorMessage){
+        Log.i(TAG, "onAddressResolvedFailed() fired!");
         for(LocationServiceListener listener : listeners){
             listener.onAddressResolvedFailed(errorMessage);
         }
     }
 
     protected void fireOnConnected(){
+        Log.i(TAG, "onConnected() fired!");
         for(LocationServiceListener listener : listeners){
             listener.onConnected();
         }
     }
 
     protected void fireOnDisconnected(){
+        Log.i(TAG, "onDisconnected() fired!");
         for(LocationServiceListener listener : listeners){
             listener.onDisconnected();
         }
