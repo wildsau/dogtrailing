@@ -45,6 +45,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
      * Receiver registered with this activity to get the response from FetchAddressIntentService.
      */
     private AddressResultReceiver resultReceiver;
+    private SingleLocationRequestListener singleLocationRequestListener;
 
 
     public LocationService(Context context) {
@@ -63,6 +64,9 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
     public void stop() {
+        if (singleLocationRequestListener != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, singleLocationRequestListener);
+        }
         if (googleApiClient.isConnected() || googleApiClient.isConnecting()) {
             googleApiClient.disconnect();
             fireOnDisconnected();
@@ -74,11 +78,15 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     //region ### Business Logic Methods ###
 
     public void retrieveCurrentLocation() {
-        Log.i(TAG, LocationServices.FusedLocationApi.getLastLocation(googleApiClient).toString());
-        LocationRequest request = LocationRequest.create()
-                .setNumUpdates(1)
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,request,new SingleLocationRequestListener());
+        // There is already a pending request.
+        if (singleLocationRequestListener == null) {
+            LocationRequest request = LocationRequest.create()
+                    .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                    .setInterval(1000)
+                    .setFastestInterval(500);
+            singleLocationRequestListener = new SingleLocationRequestListener();
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, request, singleLocationRequestListener);
+        }
     }
 
     public boolean retrieveAddress(Location location){
@@ -172,6 +180,8 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
         @Override
         public void onLocationChanged(Location location) {
             Log.i(TAG, "onLocationChanged() fired!");
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+            LocationService.this.singleLocationRequestListener = null;
             LocationService.this.fireOnCurrentLocationFound(location);
         }
     }

@@ -126,6 +126,8 @@ public class EditSessionDetailsFragment extends Fragment implements DateTimePick
     public void onStop() {
         super.onStop();
 
+        locationRequested = false;
+
         locationService.stop();
     }
 
