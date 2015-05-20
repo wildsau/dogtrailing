@@ -12,11 +12,13 @@
         <DatePicker
             android:id="@+id/date_picker"
             android:calendarViewShown="false"
+            android:datePickerMode="spinner"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
         <TimePicker
             android:id="@+id/time_picker"
+            android:timePickerMode="spinner"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 

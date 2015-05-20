@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import de.wildsau.dogtrailing.edit.EditSessionActivity;
+import de.wildsau.dogtrailing.edit.EditTagListActivity;
 import de.wildsau.dogtrailing.entities.DaoSession;
 import de.wildsau.dogtrailing.model.TrailingSession;
 
@@ -93,7 +94,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openSettings() {
-        showToast("Hurra!!!!");
+        Intent intent = new Intent(this, EditTagListActivity.class);
+        startActivity(intent);
     }
 
     private void openAdd() {

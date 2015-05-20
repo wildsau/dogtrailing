@@ -1,9 +1,7 @@
 package de.wildsau.dogtrailing.widgets;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,10 +12,9 @@ import de.wildsau.dogtrailing.model.SessionTag;
 /**
  * Created by becker on 16.03.2015.
  */
-public class TagView extends LinearLayout implements View.OnClickListener {
+public class TagView extends LinearLayout {
 
     private final TextView tagText;
-    private final ImageView removeButton;
     private final ImageView tagLogo;
 
     private SessionTag value;
@@ -34,8 +31,6 @@ public class TagView extends LinearLayout implements View.OnClickListener {
         inflater.inflate(R.layout.view_tag, this, true);
 
         tagText = (TextView) findViewById(R.id.tag_text);
-        removeButton = (ImageView) findViewById(R.id.remove_button);
-        removeButton.setOnClickListener(this);
         tagLogo = (ImageView) findViewById(R.id.tag_logo);
     }
 
@@ -51,11 +46,5 @@ public class TagView extends LinearLayout implements View.OnClickListener {
 
         invalidate();
         requestLayout();
-    }
-
-    @Override
-    public void onClick(View v) {
-        float density = getResources().getDisplayMetrics().density;
-        Log.i("TEST", "Density: " + density + " Height in px: " + tagLogo.getHeight() + " DP: " + (int) (tagLogo.getHeight() / density + 0.5f));
     }
 }
