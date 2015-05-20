@@ -94,8 +94,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openSettings() {
-        Intent intent = new Intent(this, EditTagListActivity.class);
-        startActivity(intent);
     }
 
     private void openAdd() {

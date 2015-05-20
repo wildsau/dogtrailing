@@ -3,6 +3,7 @@ package de.wildsau.dogtrailing.edit;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.wefika.flowlayout.FlowLayout;
 
 import java.util.Date;
+import java.util.EnumSet;
 
 import de.wildsau.dogtrailing.DogTrailingApplication;
 import de.wildsau.dogtrailing.R;
@@ -41,6 +43,8 @@ public class EditSessionActivity extends ActionBarActivity implements DateTimePi
 
     private java.text.DateFormat timeFormat;
     private java.text.DateFormat dateFormat;
+    private EnumSet<SessionTag> selectedSessionTags = EnumSet.of(SessionTag.START_OK,SessionTag.DISTRACTIONS_ACCEPTED);
+
 
     private EditText sessionTitleEdit;
     private EditText creationEdit;
@@ -118,7 +122,7 @@ public class EditSessionActivity extends ActionBarActivity implements DateTimePi
 
         FlowLayout tagList = (FlowLayout) findViewById(R.id.tag_list);
 
-        for (SessionTag tag : SessionTag.values()) {
+        for (SessionTag tag : selectedSessionTags) {
             TagView tv = new TagView(this);
             tv.setValue(tag);
 
@@ -195,8 +199,11 @@ public class EditSessionActivity extends ActionBarActivity implements DateTimePi
     }
 
     public void onTagListClicked(View view) {
+        Intent intent = new Intent(this, EditTagListActivity.class);
 
-        showToast("Hurra");
+        intent.putExtra(EditTagListActivity.EXTRA_SESSION_TAGS,selectedSessionTags);
+
+        startActivity(intent);
     }
 
     @Override
